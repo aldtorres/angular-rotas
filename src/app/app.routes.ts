@@ -4,6 +4,7 @@ import { ListaPostagemComponent } from './paginas/lista-postagem/lista-postagem.
 import { AuthGuard } from './guards/auth.guard';
 import { LayoutComponent } from './componentes/layout/layout.component';
 import { DetalhesPostagemComponent } from './paginas/detalhes-postagem/detalhes-postagem.component';
+import { postResolver } from './resolvers/post.resolver';
 export const routes: Routes = [
     {
         //=> url/registro
@@ -20,7 +21,9 @@ export const routes: Routes = [
                     .then(modulo => modulo.ListaPostagemModule)
             },
             {
-                path:"posts/:id", component: DetalhesPostagemComponent
+                //path:"posts/:id", component: DetalhesPostagemComponent
+                //usar resolver, só habilitar com retorno da chamada
+                path:"posts/:id", component: DetalhesPostagemComponent, resolve:{ postFoca: postResolver}
             }
         ]
     }

@@ -13,14 +13,23 @@ import { ActivatedRoute, Router } from '@angular/router';
   imports: [CommonModule, UsuarioPostagemComponent], 
 
 })
-export class DetalhesPostagemComponent implements OnInit {
+//export class DetalhesPostagemComponent implements OnInit {
+export class DetalhesPostagemComponent {
   
   postId: string | null = null;
   post: Postagem | undefined;
 
   constructor(private rotaAtual: ActivatedRoute, private router: Router){
+    //postResolver
+    //pega o resolver!
+    this.post = this.rotaAtual.snapshot.data["postFoca"];
+    if(!this.post){
+      this.router.navigate(["/posts"]);
+    }
   }
 
+  //motivo comentado: como está utilizando resolver "postResolver" na rota não há necessidade do init verificar se carregou a api, o resolver só disponibiliza qdo rota responder ok!
+  /*
   ngOnInit(): void {
     //obter id da rota
     this.postId = this.rotaAtual.snapshot.paramMap.get("id");    
@@ -38,5 +47,5 @@ export class DetalhesPostagemComponent implements OnInit {
 
     }
   }
-
+  */
 }
